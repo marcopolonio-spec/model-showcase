@@ -1,0 +1,163 @@
+// ============================================================
+// PORTFOLIO DATA — Modifica questo file per aggiornare il sito
+// Senza toccare i componenti. Tieni le strutture invariate.
+// ============================================================
+
+// ------------------------------------------------------------------
+// Helper: costruisce un URL assoluto che rispetta il base path di
+// GitHub Pages (utile per file messi in /public).
+// ------------------------------------------------------------------
+const basePath = import.meta.env.BASE_URL || '/';
+
+export const assetUrl = (path) => {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path)) return path; // URL remoto
+  return `${basePath}${path.replace(/^\/+/, '')}`;
+};
+
+// ------------------------------------------------------------------
+// DATI DELLA MODELLA
+// ------------------------------------------------------------------
+export const modelInfo = {
+  name: 'Tais Nascimento da Silva',
+  firstName: 'Tais',
+  lastName: 'Nascimento da Silva',
+  title: 'Fashion & Editorial Model',
+  // Immagine hero full-screen (placeholder; sostituisci con la tua foto principale)
+  heroImage: 'https://picsum.photos/seed/hero-model/1920/1080',
+  tagline: {
+    it: 'Eleganza senza tempo, presenza che lascia il segno.',
+    en: 'Timeless elegance, presence that leaves a mark.',
+    fr: "Élégance intemporelle, une présence qui marque.",
+  },
+  bio: {
+    it: "Modella italiana con base a Milano, specializzata in editoriale di moda, campagna pubblicitaria e sfilate. La mia ricerca è un equilibrio tra intensità espressiva e naturalezza davanti all'obiettivo: ogni scatto racconta una storia, ogni look prende vita. Collaboro con brand, riviste e agenzie in tutta Europa ed Estero.",
+    en: "Italian model based in Milan, specialized in fashion editorials, advertising campaigns and runway. My work is a balance between expressive intensity and naturalness in front of the lens: every shot tells a story, every look comes to life. I collaborate with brands, magazines and agencies across Europe and beyond.",
+    fr: "Mannequin italienne basée à Milan, spécialisée dans l'éditorial de mode, la publicité et le défilé. Mon travail est un équilibre entre intensité expressive et naturel face à l'objectif : chaque image raconte une histoire, chaque look prend vie. Je collabore avec des marques, des magazines et des agences en Europe et au-delà.",
+  },
+  measurements: [
+    { label: 'Altezza', value: "178 cm", en: 'Height', fr: 'Taille' },
+    { label: 'Busto', value: '84 cm', en: 'Bust', fr: 'Poitrine' },
+    { label: 'Vita', value: '61 cm', en: 'Waist', fr: 'Tour de taille' },
+    { label: 'Fianchi', value: '89 cm', en: 'Hips', fr: 'Hanches' },
+    { label: 'Scarpe', value: '39 EU', en: 'Shoes', fr: "Chaussures" },
+    { label: 'Occhi', value: 'Marrone scuro', en: 'Dark brown', fr: 'Marron foncé' },
+    { label: 'Capelli', value: 'Castano scuro', en: 'Dark brown', fr: 'Brun foncé' },
+  ],
+  agencies: [
+    { name: 'Why Not Model Management', city: 'Milano', country: 'IT' },
+    { name: 'Elite Model Management', city: 'Parigi', country: 'FR' },
+    { name: 'Next Management', city: 'New York', country: 'US' },
+  ],
+  email: 'tais.ns88@gmail.com',
+  comcardUrl: '/comcard.pdf',
+};
+
+// ------------------------------------------------------------------
+// GALLERIA — Placeholder (sostituisci gli URL con le tue foto)
+// category: editorial | runway | commercial | beauty
+// heightClass viene ignorato perché usiamo il masonry con heights
+// (vedi proprietà heightClassH: altezza in % per CSS columns).
+// ------------------------------------------------------------------
+export const galleryImages = [
+  { id: 1, src: 'https://picsum.photos/seed/editorial1/800/1100', alt: 'Editorial — Milano, gioco di luci', category: 'Editorial', ratio: '4/5' },
+  { id: 2, src: 'https://picsum.photos/seed/runway1/800/1000', alt: 'Runway — Backstage Fashion Week', category: 'Runway', ratio: '4/5' },
+  { id: 3, src: 'https://picsum.photos/seed/commercial1/800/900', alt: 'Commercial — Campagna beauty essenziale', category: 'Commercial', ratio: '4/3' },
+  { id: 4, src: 'https://picsum.photos/seed/beauty1/800/1000', alt: 'Beauty — Ritratto a luce naturale', category: 'Beauty', ratio: '4/5' },
+  { id: 5, src: 'https://picsum.photos/seed/editorial2/800/1200', alt: 'Editorial — Gioco di texture e ombre', category: 'Editorial', ratio: '4/5' },
+  { id: 6, src: 'https://picsum.photos/seed/runway2/800/950', alt: 'Runway — Dettaglio di uno styling', category: 'Runway', ratio: '4/5' },
+  { id: 7, src: 'https://picsum.photos/seed/commercial2/800/850', alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
+  { id: 8, src: 'https://picsum.photos/seed/beauty2/800/1050', alt: 'Beauty — Primo piano con drappeggio', category: 'Beauty', ratio: '4/5' },
+  { id: 9, src: 'https://picsum.photos/seed/editorial3/800/1000', alt: 'Editorial — Set monocromatico', category: 'Editorial', ratio: '4/5' },
+  { id: 10, src: 'https://picsum.photos/seed/runway3/800/1100', alt: 'Runway — Backstage', category: 'Runway', ratio: '4/5' },
+  { id: 11, src: 'https://picsum.photos/seed/beauty3/800/900', alt: 'Beauty — Beauty shot close-up', category: 'Beauty', ratio: '3/4' },
+  { id: 12, src: 'https://picsum.photos/seed/commercial3/800/1000', alt: 'Commercial — Lookbook autunno inverno', category: 'Commercial', ratio: '4/5' },
+];
+
+// Categorie per i filtri (ordine di visualizzazione)
+export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty'];
+
+// ------------------------------------------------------------------
+// NAVIGAZIONE
+// ------------------------------------------------------------------
+export const navLinks = [
+  { label: 'Home', id: 'home', labelEn: 'Home', labelFr: 'Accueil' },
+  { label: 'Portfolio', id: 'portfolio', labelEn: 'Portfolio', labelFr: 'Portfolio' },
+  { label: 'About', id: 'about', labelEn: 'About', labelFr: 'À propos' },
+  { label: 'Contatti', id: 'contact', labelEn: 'Contact', labelFr: 'Contact' },
+];
+
+// ------------------------------------------------------------------
+// SOCIAL
+// ------------------------------------------------------------------
+export const socials = [
+  { name: 'Instagram', url: 'https://www.instagram.com/tais.nscto/', handle: '@tais.nscto' },
+  { name: 'TikTok', url: 'https://tiktok.com/@elenamoretti', handle: '@elenamoretti' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/elenamoretti', handle: 'in/elenamoretti' },
+];
+
+// ------------------------------------------------------------------
+// LINGUE / TESTO UI
+// ------------------------------------------------------------------
+export const supportedLanguages = [
+  { code: 'it', label: 'IT', labelFull: 'Italiano' },
+  { code: 'en', label: 'EN', labelFull: 'English' },
+  { code: 'fr', label: 'FR', labelFull: 'Français' },
+];
+
+export const uiText = {
+  it: {
+    nav: navLinks,
+    viewWork: 'Vedi il portfolio',
+    getInTouch: 'Scrivimi',
+    filterLabel: 'Categorie:',
+    allLabel: 'Tutti',
+    measurementsTitle: 'Misure',
+    agenciesTitle: 'Agenzie',
+    contactTitle: 'Contatti',
+    contactSubtitle: 'Per collaborazioni, campagne e editoriali scrivimi direttamente.',
+    downloadComcard: 'Scarica Comcard (PDF)',
+    footerRights: 'Tutti i diritti riservati.',
+    footerCredit: 'Design & Sviluppo — Portfolio Editoriale',
+    close: 'Chiudi',
+    prev: 'Precedente',
+    next: 'Successiva',
+    logoTitle: 'Portfolio ufficiale',
+  },
+  en: {
+    nav: navLinks.map((n) => ({ ...n, label: n.labelEn })),
+    viewWork: 'View portfolio',
+    getInTouch: 'Get in touch',
+    filterLabel: 'Categories:',
+    allLabel: 'All',
+    measurementsTitle: 'Measurements',
+    agenciesTitle: 'Agencies',
+    contactTitle: 'Contact',
+    contactSubtitle: 'For collaborations, campaigns and editorials, write to me directly.',
+    downloadComcard: 'Download Comcard (PDF)',
+    footerRights: 'All rights reserved.',
+    footerCredit: 'Design & Development — Editorial Portfolio',
+    close: 'Close',
+    prev: 'Previous',
+    next: 'Next',
+    logoTitle: 'Official portfolio',
+  },
+  fr: {
+    nav: navLinks.map((n) => ({ ...n, label: n.labelFr })),
+    viewWork: 'Voir le portfolio',
+    getInTouch: 'Contactez-moi',
+    filterLabel: 'Catégories :',
+    allLabel: 'Tous',
+    measurementsTitle: 'Mensurations',
+    agenciesTitle: 'Agences',
+    contactTitle: 'Contact',
+    contactSubtitle: "Pour collaborations, campagnes et éditoriaux, écrivez-moi directement.",
+    downloadComcard: 'Télécharger la Comcard (PDF)',
+    footerRights: 'Tous droits réservés.',
+    footerCredit: 'Design & Développement — Portfolio Éditorial',
+    close: 'Fermer',
+    prev: 'Précédente',
+    next: 'Suivante',
+    logoTitle: 'Portfolio officiel',
+  },
+};
