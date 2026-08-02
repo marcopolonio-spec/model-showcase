@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://<TUO-UTENTE-GITHUB>.github.io/model-showcase/",
+  "homepage": "https://marcopolonio-spec.github.io/model-showcase/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
