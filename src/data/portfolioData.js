@@ -12,6 +12,11 @@ const basePath = import.meta.env.BASE_URL || '/';
 export const assetUrl = (path) => {
   if (!path) return '';
   if (/^(https?:)?\/\//.test(path)) return path; // URL remoto
+  // Le immagini importate da Vite hanno già il base path assoluto
+  // (es. '/model-showcase/assets/hero-abc123.jpg' in produzione),
+  // quindi non va aggiunto di nuovo.
+  if (path.startsWith(basePath)) return path;
+  // Per i file in /public (es. '/comcard.pdf') aggiungi il base path.
   return `${basePath}${path.replace(/^\/+/, '')}`;
 };
 
