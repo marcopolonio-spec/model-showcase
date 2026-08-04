@@ -16,15 +16,22 @@ export const assetUrl = (path) => {
 };
 
 // ------------------------------------------------------------------
+// Hero image — importata dal file locale in /src/assets/images/hero.jpg
+// Per cambiarla: sostituisci il file hero.jpg (stesso nome) oppure
+// modifica l'import qui sotto / il valore di heroImage con un URL remoto.
+// ------------------------------------------------------------------
+import heroImage from '../assets/images/hero.jpg';
+
+// ------------------------------------------------------------------
 // DATI DELLA MODELLA
 // ------------------------------------------------------------------
 export const modelInfo = {
-  name: 'Tais Nascimento da Silva',
+  name: 'Tais Nascimento',
   firstName: 'Tais',
-  lastName: 'Nascimento da Silva',
+  lastName: 'Nascimento',
   title: 'Fashion & Editorial Model',
-  // Immagine hero full-screen (placeholder; sostituisci con la tua foto principale)
-  heroImage: 'https://picsum.photos/seed/hero-model/1920/1080',
+  // Immagine hero full-screen — usa il file locale hero.jpg
+  heroImage: heroImage,
   tagline: {
     it: 'Eleganza senza tempo, presenza che lascia il segno.',
     en: 'Timeless elegance, presence that leaves a mark.',
@@ -58,15 +65,27 @@ export const modelInfo = {
 // category: editorial | runway | commercial | beauty
 // heightClass viene ignorato perché usiamo il masonry con heights
 // (vedi proprietà heightClassH: altezza in % per CSS columns).
+// Per ogni foto della galleria puoi impostare: 
+// `id`, `src`, `alt` (didascalia), 
+// `category` (E: Editorial, Runway, Commercial, Beauty)
+// `ratio` (es. `'4/5'`, `'4/3'`, `'3/4'`, `'1/1'`) per variare le altezze nel layout masonry.
 // ------------------------------------------------------------------
+import MNF_3461 from '../assets/images/MNF_3461.jpg';
+import DSCF7868 from '../assets/images/DSCF7868.jpg';
+import pic001 from '../assets/images/pic001.jpg';
+import pic003 from '../assets/images/pic003.jpg';
+import pic004 from '../assets/images/pic004.jpg';
+import DSCF8094 from '../assets/images/DSCF8094.jpg';
+import DSCF7909 from '../assets/images/DSCF7909.jpg';
+
 export const galleryImages = [
-  { id: 1, src: 'https://picsum.photos/seed/editorial1/800/1100', alt: 'Editorial — Milano, gioco di luci', category: 'Editorial', ratio: '4/5' },
-  { id: 2, src: 'https://picsum.photos/seed/runway1/800/1000', alt: 'Runway — Backstage Fashion Week', category: 'Runway', ratio: '4/5' },
-  { id: 3, src: 'https://picsum.photos/seed/commercial1/800/900', alt: 'Commercial — Campagna beauty essenziale', category: 'Commercial', ratio: '4/3' },
-  { id: 4, src: 'https://picsum.photos/seed/beauty1/800/1000', alt: 'Beauty — Ritratto a luce naturale', category: 'Beauty', ratio: '4/5' },
-  { id: 5, src: 'https://picsum.photos/seed/editorial2/800/1200', alt: 'Editorial — Gioco di texture e ombre', category: 'Editorial', ratio: '4/5' },
-  { id: 6, src: 'https://picsum.photos/seed/runway2/800/950', alt: 'Runway — Dettaglio di uno styling', category: 'Runway', ratio: '4/5' },
-  { id: 7, src: 'https://picsum.photos/seed/commercial2/800/850', alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
+  { id: 1, src: MNF_3461, alt: 'Editorial — Milano, gioco di luci', category: 'Editorial', ratio: '4/5' },
+  { id: 2, src: DSCF7868, alt: 'Runway — Backstage Fashion Week', category: 'Runway', ratio: '4/5' },
+  { id: 3, src: pic004, alt: 'Commercial — Campagna beauty essenziale', category: 'B&W', ratio: '4/3' },
+  { id: 4, src: pic001, alt: 'Beauty — Ritratto a luce naturale', category: 'Beauty', ratio: '4/5' },
+  { id: 5, src: pic003, alt: 'Editorial — Gioco di texture e ombre', category: 'Editorial', ratio: '4/5' },
+  { id: 6, src: DSCF8094, alt: 'Runway — Dettaglio di uno styling', category: 'B&W', ratio: '4/5' },
+  { id: 7, src: DSCF7909, alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
   { id: 8, src: 'https://picsum.photos/seed/beauty2/800/1050', alt: 'Beauty — Primo piano con drappeggio', category: 'Beauty', ratio: '4/5' },
   { id: 9, src: 'https://picsum.photos/seed/editorial3/800/1000', alt: 'Editorial — Set monocromatico', category: 'Editorial', ratio: '4/5' },
   { id: 10, src: 'https://picsum.photos/seed/runway3/800/1100', alt: 'Runway — Backstage', category: 'Runway', ratio: '4/5' },
@@ -75,7 +94,7 @@ export const galleryImages = [
 ];
 
 // Categorie per i filtri (ordine di visualizzazione)
-export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty'];
+export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty', 'B&W'];
 
 // ------------------------------------------------------------------
 // NAVIGAZIONE
