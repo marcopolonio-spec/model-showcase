@@ -98,6 +98,25 @@ export const galleryImages = [
   { id: 12, src: 'https://picsum.photos/seed/commercial3/800/1000', alt: 'Commercial — Lookbook autunno inverno', category: 'Commercial', ratio: '4/5' },
 ];
 
+// ------------------------------------------------------------------
+// SHOWREEL — Video di presentazione su YouTube
+// Sostituisci `youtubeVideoId` con l'ID del tuo video
+// (es. per https://www.youtube.com/watch?v=abc123xyz usa "abc123xyz").
+// ------------------------------------------------------------------
+export const showreel = {
+  youtubeVideoId: 'ID_DEL_VIDEO', // <-- SOSTITUISCI con l'ID del tuo video
+  title: {
+    it: 'Showreel / Video Portfolio',
+    en: 'Showreel / Video Portfolio',
+    fr: 'Showreel / Portfolio Vidéo',
+  },
+  description: {
+    it: 'Una selezione di momenti selezionati tra editoriali, campagne e backstage.',
+    en: 'A curated selection of moments from editorials, campaigns and backstage.',
+    fr: 'Une sélection de moments choisis entre éditoriaux, campagnes et coulisses.',
+  },
+};
+
 // Categorie per i filtri (ordine di visualizzazione)
 export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty', 'B&W'];
 
