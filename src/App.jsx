@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Gallery from './components/Gallery.jsx';
+import Showreel from './components/Showreel.jsx';
 import Lightbox from './components/Lightbox.jsx';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
@@ -40,6 +41,7 @@ const App = () => {
       <main>
         <Hero language={language} />
         <Gallery language={language} onImageClick={handleImageClick} />
+        <Showreel language={language} />
         <About language={language} />
         <Contact language={language} />
       </main>

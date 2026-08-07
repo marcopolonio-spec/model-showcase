@@ -25,7 +25,7 @@ export const assetUrl = (path) => {
 // Per cambiarla: sostituisci il file hero.jpg (stesso nome) oppure
 // modifica l'import qui sotto / il valore di heroImage con un URL remoto.
 // ------------------------------------------------------------------
-import heroImage from '../assets/images/hero.jpg';
+import heroImage from '../assets/images/hero2.jpg';
 
 // ------------------------------------------------------------------
 // DATI DELLA MODELLA
@@ -82,21 +82,42 @@ import pic003 from '../assets/images/pic003.jpg';
 import pic004 from '../assets/images/pic004.jpg';
 import DSCF8094 from '../assets/images/DSCF8094.jpg';
 import DSCF7909 from '../assets/images/DSCF7909.jpg';
+import seconda_strada13 from '../assets/images/seconda_strada13.jpg';
+import tonyphotoart218 from '../assets/images/tonyphotoart218.jpg';
 
 export const galleryImages = [
   { id: 1, src: MNF_3461, alt: 'Editorial — Milano, gioco di luci', category: 'Editorial', ratio: '4/5' },
   { id: 2, src: DSCF7868, alt: 'Runway — Backstage Fashion Week', category: 'Runway', ratio: '4/5' },
-  { id: 3, src: pic004, alt: 'Commercial — Campagna beauty essenziale', category: 'B&W', ratio: '4/3' },
+  { id: 3, src: pic004, alt: 'Commercial — Campagna beauty essenziale', category: 'Commercial', ratio: '4/3' },
   { id: 4, src: pic001, alt: 'Beauty — Ritratto a luce naturale', category: 'Beauty', ratio: '4/5' },
   { id: 5, src: pic003, alt: 'Editorial — Gioco di texture e ombre', category: 'Editorial', ratio: '4/5' },
-  { id: 6, src: DSCF8094, alt: 'Runway — Dettaglio di uno styling', category: 'B&W', ratio: '4/5' },
-  { id: 7, src: DSCF7909, alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
-  { id: 8, src: 'https://picsum.photos/seed/beauty2/800/1050', alt: 'Beauty — Primo piano con drappeggio', category: 'Beauty', ratio: '4/5' },
+  { id: 6, src: DSCF8094, alt: 'Editorial — Black & White', category: 'Editorial', ratio: '4/5' },
+  { id: 7, src: seconda_strada13, alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
+  { id: 8, src: tonyphotoart218, alt: 'Beauty — Primo piano con drappeggio', category: 'Beauty', ratio: '4/5' },
   { id: 9, src: 'https://picsum.photos/seed/editorial3/800/1000', alt: 'Editorial — Set monocromatico', category: 'Editorial', ratio: '4/5' },
   { id: 10, src: 'https://picsum.photos/seed/runway3/800/1100', alt: 'Runway — Backstage', category: 'Runway', ratio: '4/5' },
   { id: 11, src: 'https://picsum.photos/seed/beauty3/800/900', alt: 'Beauty — Beauty shot close-up', category: 'Beauty', ratio: '3/4' },
   { id: 12, src: 'https://picsum.photos/seed/commercial3/800/1000', alt: 'Commercial — Lookbook autunno inverno', category: 'Commercial', ratio: '4/5' },
 ];
+
+// ------------------------------------------------------------------
+// SHOWREEL — Video di presentazione su YouTube
+// Sostituisci `youtubeVideoId` con l'ID del tuo video
+// (es. per https://www.youtube.com/watch?v=abc123xyz usa "abc123xyz").
+// ------------------------------------------------------------------
+export const showreel = {
+  youtubeVideoId: 'GGVI978SLu0', // <-- SOSTITUISCI con l'ID del tuo video
+  title: {
+    it: 'Showreel / Video Portfolio',
+    en: 'Showreel / Video Portfolio',
+    fr: 'Showreel / Portfolio Vidéo',
+  },
+  description: {
+    it: 'Una selezione di momenti selezionati tra editoriali, campagne e backstage.',
+    en: 'A curated selection of moments from editorials, campaigns and backstage.',
+    fr: 'Une sélection de moments choisis entre éditoriaux, campagnes et coulisses.',
+  },
+};
 
 // Categorie per i filtri (ordine di visualizzazione)
 export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty', 'B&W'];
