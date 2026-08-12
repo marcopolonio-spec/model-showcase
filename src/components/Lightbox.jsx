@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { galleryImages, uiText, assetUrl } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
+import { assetUrl } from '../data/portfolioData.js';
 
 const Lightbox = ({ image, onClose, language }) => {
+  const { data } = usePortfolioData();
+  const { galleryImages, uiText } = data;
   const t = uiText[language];
   const [currentIndex, setCurrentIndex] = useState(
     () => galleryImages.findIndex((img) => img.id === image?.id) ?? 0
@@ -72,7 +75,7 @@ const Lightbox = ({ image, onClose, language }) => {
     setTouchStartX(null);
   };
 
-  if (!image) return null;
+  if (!image || galleryImages.length === 0) return null;
 
   return (
     <div

@@ -1,4 +1,4 @@
-import { modelInfo, socials, uiText } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
 import { Instagram, Linkedin } from 'lucide-react';
 import TiktokIcon from './icons/TiktokIcon.jsx';
 
@@ -9,6 +9,8 @@ const socialIcons = {
 };
 
 const Footer = ({ language }) => {
+  const { data } = usePortfolioData();
+  const { modelInfo, socials, uiText } = data;
   const t = uiText[language];
   const year = new Date().getFullYear();
 

@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { galleryImages, categories, uiText, assetUrl } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
+import { assetUrl } from '../data/portfolioData.js';
 
 const Gallery = ({ language, onImageClick }) => {
+  const { data } = usePortfolioData();
+  const { galleryImages, categories, uiText } = data;
   const t = uiText[language];
   const [activeFilter, setActiveFilter] = useState('Tutti');
   const [visibleCount, setVisibleCount] = useState(9);
@@ -115,6 +118,8 @@ const Gallery = ({ language, onImageClick }) => {
               ? 'aspect-[3/4]'
               : img.ratio === '1/1'
               ? 'aspect-square'
+              : img.ratio === '5/4'
+              ? 'aspect-[5/4]'
               : 'aspect-[4/5]';
 
           return (

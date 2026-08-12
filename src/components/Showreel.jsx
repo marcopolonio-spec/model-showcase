@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { showreel } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
 
 const Showreel = ({ language }) => {
+  const { data } = usePortfolioData();
+  const { showreel } = data;
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 

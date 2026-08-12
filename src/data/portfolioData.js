@@ -1,6 +1,16 @@
 // ============================================================
-// PORTFOLIO DATA — Modifica questo file per aggiornare il sito
-// Senza toccare i componenti. Tieni le strutture invariate.
+// PORTFOLIO DATA — collegamento al backend mod-show-backend
+// ------------------------------------------------------------
+// Le configurazioni del sito NON sono più statiche: vengono
+// recuperate dal backend tramite `fetchPortfolioConfig()` e
+// normalizzate in `portfolioConfig.js`.
+//
+// In questo file restano cablate SOLO:
+//   - la HERO IMAGE (import locale)
+//   - la COMCARD (PDF in /public)
+// finché il backend non espone questi asset via API
+// (profile.heroImageUrl / profile.comcardUrl in
+// `/api/v1/public/config?slug=tais-nascimento`).
 // ============================================================
 
 // ------------------------------------------------------------------
@@ -21,188 +31,37 @@ export const assetUrl = (path) => {
 };
 
 // ------------------------------------------------------------------
-// Hero image — importata dal file locale in /src/assets/images/hero.jpg
-// Per cambiarla: sostituisci il file hero.jpg (stesso nome) oppure
-// modifica l'import qui sotto / il valore di heroImage con un URL remoto.
+// Configurazioni statiche — hero image e comcard
+// (da sostituire con gli asset del backend quando saranno disponibili)
 // ------------------------------------------------------------------
 import heroImage from '../assets/images/hero2.jpg';
 
-// ------------------------------------------------------------------
-// DATI DELLA MODELLA
-// ------------------------------------------------------------------
-export const modelInfo = {
-  name: 'Tais Nascimento',
-  firstName: 'Tais',
-  lastName: 'Nascimento',
-  title: 'Fashion & Editorial Model',
-  // Immagine hero full-screen — usa il file locale hero.jpg
-  heroImage: heroImage,
-  tagline: {
-    it: 'Eleganza senza tempo, presenza che lascia il segno.',
-    en: 'Timeless elegance, presence that leaves a mark.',
-    fr: "Élégance intemporelle, une présence qui marque.",
-  },
-  bio: {
-    it: "Modella italiana con base a Milano, specializzata in editoriale di moda, campagna pubblicitaria e sfilate. La mia ricerca è un equilibrio tra intensità espressiva e naturalezza davanti all'obiettivo: ogni scatto racconta una storia, ogni look prende vita. Collaboro con brand, riviste e agenzie in tutta Europa ed Estero.",
-    en: "Italian model based in Milan, specialized in fashion editorials, advertising campaigns and runway. My work is a balance between expressive intensity and naturalness in front of the lens: every shot tells a story, every look comes to life. I collaborate with brands, magazines and agencies across Europe and beyond.",
-    fr: "Mannequin italienne basée à Milan, spécialisée dans l'éditorial de mode, la publicité et le défilé. Mon travail est un équilibre entre intensité expressive et naturel face à l'objectif : chaque image raconte une histoire, chaque look prend vie. Je collabore avec des marques, des magazines et des agences en Europe et au-delà.",
-  },
-  measurements: [
-    { label: 'Altezza', value: "178 cm", en: 'Height', fr: 'Taille' },
-    { label: 'Busto', value: '84 cm', en: 'Bust', fr: 'Poitrine' },
-    { label: 'Vita', value: '61 cm', en: 'Waist', fr: 'Tour de taille' },
-    { label: 'Fianchi', value: '89 cm', en: 'Hips', fr: 'Hanches' },
-    { label: 'Scarpe', value: '39 EU', en: 'Shoes', fr: "Chaussures" },
-    { label: 'Occhi', value: 'Marrone scuro', en: 'Dark brown', fr: 'Marron foncé' },
-    { label: 'Capelli', value: 'Castano scuro', en: 'Dark brown', fr: 'Brun foncé' },
-  ],
-  agencies: [
-    { name: 'Why Not Model Management', city: 'Milano', country: 'IT' },
-    { name: 'Elite Model Management', city: 'Parigi', country: 'FR' },
-    { name: 'Next Management', city: 'New York', country: 'US' },
-  ],
-  email: 'tais.ns88@gmail.com',
-  comcardUrl: '/comcard.pdf',
-};
+export const STATIC_HERO_IMAGE = heroImage;
+export const STATIC_COMCARD_URL = '/comcard.pdf';
 
 // ------------------------------------------------------------------
-// GALLERIA — Placeholder (sostituisci gli URL con le tue foto)
-// category: editorial | runway | commercial | beauty
-// heightClass viene ignorato perché usiamo il masonry con heights
-// (vedi proprietà heightClassH: altezza in % per CSS columns).
-// Per ogni foto della galleria puoi impostare: 
-// `id`, `src`, `alt` (didascalia), 
-// `category` (E: Editorial, Runway, Commercial, Beauty)
-// `ratio` (es. `'4/5'`, `'4/3'`, `'3/4'`, `'1/1'`) per variare le altezze nel layout masonry.
+// Configurazione API backend
 // ------------------------------------------------------------------
-import MNF_3461 from '../assets/images/MNF_3461.jpg';
-import DSCF7868 from '../assets/images/DSCF7868.jpg';
-import pic001 from '../assets/images/pic001.jpg';
-import pic003 from '../assets/images/pic003.jpg';
-import pic004 from '../assets/images/pic004.jpg';
-import DSCF8094 from '../assets/images/DSCF8094.jpg';
-import DSCF7909 from '../assets/images/DSCF7909.jpg';
-import seconda_strada13 from '../assets/images/seconda_strada13.jpg';
-import tonyphotoart218 from '../assets/images/tonyphotoart218.jpg';
+import {
+  PROFILE_SLUG,
+  resolveApiBaseUrl,
+  fetchPortfolioConfig as fetchRawConfig,
+} from './portfolioConfig.js';
 
-export const galleryImages = [
-  { id: 1, src: MNF_3461, alt: 'Editorial — Milano, gioco di luci', category: 'Editorial', ratio: '4/5' },
-  { id: 2, src: DSCF7868, alt: 'Runway — Backstage Fashion Week', category: 'Runway', ratio: '4/5' },
-  { id: 3, src: pic004, alt: 'Commercial — Campagna beauty essenziale', category: 'Commercial', ratio: '4/3' },
-  { id: 4, src: pic001, alt: 'Beauty — Ritratto a luce naturale', category: 'Beauty', ratio: '4/5' },
-  { id: 5, src: pic003, alt: 'Editorial — Gioco di texture e ombre', category: 'Editorial', ratio: '4/5' },
-  { id: 6, src: DSCF8094, alt: 'Editorial — Black & White', category: 'Editorial', ratio: '4/5' },
-  { id: 7, src: seconda_strada13, alt: 'Commercial — Denim campaign', category: 'Commercial', ratio: '1/1' },
-  { id: 8, src: tonyphotoart218, alt: 'Beauty — Primo piano con drappeggio', category: 'Beauty', ratio: '4/5' },
-  { id: 9, src: 'https://picsum.photos/seed/editorial3/800/1000', alt: 'Editorial — Set monocromatico', category: 'Editorial', ratio: '4/5' },
-  { id: 10, src: 'https://picsum.photos/seed/runway3/800/1100', alt: 'Runway — Backstage', category: 'Runway', ratio: '4/5' },
-  { id: 11, src: 'https://picsum.photos/seed/beauty3/800/900', alt: 'Beauty — Beauty shot close-up', category: 'Beauty', ratio: '3/4' },
-  { id: 12, src: 'https://picsum.photos/seed/commercial3/800/1000', alt: 'Commercial — Lookbook autunno inverno', category: 'Commercial', ratio: '4/5' },
-];
+// URL base delle API: usa VITE_API_BASE_URL se impostata (vedi
+// .env.example), altrimenti il default per dev/prod.
+export const API_BASE_URL = resolveApiBaseUrl(import.meta.env);
+
+export { DEV_API_BASE_URL, PROD_API_BASE_URL, PROFILE_SLUG } from './portfolioConfig.js';
 
 // ------------------------------------------------------------------
-// SHOWREEL — Video di presentazione su YouTube
-// Sostituisci `youtubeVideoId` con l'ID del tuo video
-// (es. per https://www.youtube.com/watch?v=abc123xyz usa "abc123xyz").
+// Fetch della configurazione: recupera i dati dal backend e li
+// normalizza nella forma usata dai componenti. Hero image e comcard
+// vengono passate come fallback statici finché l'API non le espone.
 // ------------------------------------------------------------------
-export const showreel = {
-  youtubeVideoId: 'GGVI978SLu0', // <-- SOSTITUISCI con l'ID del tuo video
-  title: {
-    it: 'Showreel / Video Portfolio',
-    en: 'Showreel / Video Portfolio',
-    fr: 'Showreel / Portfolio Vidéo',
-  },
-  description: {
-    it: 'Una selezione di momenti selezionati tra editoriali, campagne e backstage.',
-    en: 'A curated selection of moments from editorials, campaigns and backstage.',
-    fr: 'Une sélection de moments choisis entre éditoriaux, campagnes et coulisses.',
-  },
-};
-
-// Categorie per i filtri (ordine di visualizzazione)
-export const categories = ['Tutti', 'Editorial', 'Runway', 'Commercial', 'Beauty', 'B&W'];
-
-// ------------------------------------------------------------------
-// NAVIGAZIONE
-// ------------------------------------------------------------------
-export const navLinks = [
-  { label: 'Home', id: 'home', labelEn: 'Home', labelFr: 'Accueil' },
-  { label: 'Portfolio', id: 'portfolio', labelEn: 'Portfolio', labelFr: 'Portfolio' },
-  { label: 'About', id: 'about', labelEn: 'About', labelFr: 'À propos' },
-  { label: 'Contatti', id: 'contact', labelEn: 'Contact', labelFr: 'Contact' },
-];
-
-// ------------------------------------------------------------------
-// SOCIAL
-// ------------------------------------------------------------------
-export const socials = [
-  { name: 'Instagram', url: 'https://www.instagram.com/tais.nscto/', handle: '@tais.nscto' },
-  { name: 'TikTok', url: 'https://tiktok.com/@elenamoretti', handle: '@elenamoretti' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/elenamoretti', handle: 'in/elenamoretti' },
-];
-
-// ------------------------------------------------------------------
-// LINGUE / TESTO UI
-// ------------------------------------------------------------------
-export const supportedLanguages = [
-  { code: 'it', label: 'IT', labelFull: 'Italiano' },
-  { code: 'en', label: 'EN', labelFull: 'English' },
-  { code: 'fr', label: 'FR', labelFull: 'Français' },
-];
-
-export const uiText = {
-  it: {
-    nav: navLinks,
-    viewWork: 'Vedi il portfolio',
-    getInTouch: 'Scrivimi',
-    filterLabel: 'Categorie:',
-    allLabel: 'Tutti',
-    measurementsTitle: 'Misure',
-    agenciesTitle: 'Agenzie',
-    contactTitle: 'Contatti',
-    contactSubtitle: 'Per collaborazioni, campagne e editoriali scrivimi direttamente.',
-    downloadComcard: 'Scarica Comcard (PDF)',
-    footerRights: 'Tutti i diritti riservati.',
-    footerCredit: 'Design & Sviluppo — Portfolio Editoriale',
-    close: 'Chiudi',
-    prev: 'Precedente',
-    next: 'Successiva',
-    logoTitle: 'Portfolio ufficiale',
-  },
-  en: {
-    nav: navLinks.map((n) => ({ ...n, label: n.labelEn })),
-    viewWork: 'View portfolio',
-    getInTouch: 'Get in touch',
-    filterLabel: 'Categories:',
-    allLabel: 'All',
-    measurementsTitle: 'Measurements',
-    agenciesTitle: 'Agencies',
-    contactTitle: 'Contact',
-    contactSubtitle: 'For collaborations, campaigns and editorials, write to me directly.',
-    downloadComcard: 'Download Comcard (PDF)',
-    footerRights: 'All rights reserved.',
-    footerCredit: 'Design & Development — Editorial Portfolio',
-    close: 'Close',
-    prev: 'Previous',
-    next: 'Next',
-    logoTitle: 'Official portfolio',
-  },
-  fr: {
-    nav: navLinks.map((n) => ({ ...n, label: n.labelFr })),
-    viewWork: 'Voir le portfolio',
-    getInTouch: 'Contactez-moi',
-    filterLabel: 'Catégories :',
-    allLabel: 'Tous',
-    measurementsTitle: 'Mensurations',
-    agenciesTitle: 'Agences',
-    contactTitle: 'Contact',
-    contactSubtitle: "Pour collaborations, campagnes et éditoriaux, écrivez-moi directement.",
-    downloadComcard: 'Télécharger la Comcard (PDF)',
-    footerRights: 'Tous droits réservés.',
-    footerCredit: 'Design & Développement — Portfolio Éditorial',
-    close: 'Fermer',
-    prev: 'Précédente',
-    next: 'Suivante',
-    logoTitle: 'Portfolio officiel',
-  },
-};
+export const fetchPortfolioConfig = () =>
+  fetchRawConfig({
+    apiBaseUrl: API_BASE_URL,
+    slug: PROFILE_SLUG,
+    staticOverrides: { heroImage, comcardUrl: STATIC_COMCARD_URL },
+  });

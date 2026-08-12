@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ArrowDown } from 'lucide-react';
-import { modelInfo, uiText, assetUrl } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
+import { assetUrl } from '../data/portfolioData.js';
 
 const Hero = ({ language }) => {
+  const { data } = usePortfolioData();
+  const { modelInfo, uiText } = data;
   const t = uiText[language];
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);

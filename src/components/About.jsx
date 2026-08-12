@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Ruler, Building2, MapPin } from 'lucide-react';
-import { modelInfo, uiText } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
 
 const About = ({ language }) => {
+  const { data } = usePortfolioData();
+  const { modelInfo, uiText } = data;
   const t = uiText[language];
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);

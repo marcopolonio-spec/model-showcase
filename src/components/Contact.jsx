@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mail, FileDown, Instagram, Linkedin } from 'lucide-react';
-import { modelInfo, socials, uiText, assetUrl } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
+import { assetUrl } from '../data/portfolioData.js';
 import TiktokIcon from './icons/TiktokIcon.jsx';
 
 const socialIcons = {
@@ -10,6 +11,8 @@ const socialIcons = {
 };
 
 const Contact = ({ language }) => {
+  const { data } = usePortfolioData();
+  const { modelInfo, socials, uiText } = data;
   const t = uiText[language];
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, ChevronDown, Instagram } from 'lucide-react';
-import { modelInfo, socials, supportedLanguages, uiText } from '../data/portfolioData.js';
+import { usePortfolioData } from '../context/PortfolioContext.jsx';
 import TiktokIcon from './icons/TiktokIcon.jsx';
 
 const socialIcons = {
@@ -10,6 +10,8 @@ const socialIcons = {
 };
 
 const Navbar = ({ language, onLanguageChange }) => {
+  const { data } = usePortfolioData();
+  const { modelInfo, socials, supportedLanguages, uiText } = data;
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
