@@ -32,7 +32,7 @@ assert(
   'VITE_API_BASE_URL ha priorità (e gli slash finali vengono rimossi)'
 );
 
-console.log('\nnormalizeConfig — fallback statici hero/comcard');
+console.log('\nnormalizeConfig — fallback statico hero');
 const mock = {
   profile: {
     firstName: 'Anna',
@@ -40,7 +40,6 @@ const mock = {
     title: 'Model',
     email: 'a@b.it',
     heroImageUrl: null,
-    comcardUrl: null,
     tagline: { it: 't', en: 'e', fr: 'f' },
     bio: { it: 'b', en: 'bb', fr: 'bbb' },
   },
@@ -56,10 +55,9 @@ const mock = {
     uiText: { it: { viewWork: 'Vedi' }, en: { viewWork: 'View' }, fr: { viewWork: 'Voir' } },
   },
 };
-const norm = normalizeConfig(mock, { heroImage: 'static-hero.jpg', comcardUrl: '/comcard.pdf' });
+const norm = normalizeConfig(mock, { heroImage: 'static-hero.jpg' });
 assert(norm.modelInfo.name === 'Anna Rossi', 'name composto da firstName + lastName');
 assert(norm.modelInfo.heroImage === 'static-hero.jpg', 'heroImage usa il fallback statico quando l API è null');
-assert(norm.modelInfo.comcardUrl === '/comcard.pdf', 'comcardUrl usa il fallback statico');
 assert(norm.modelInfo.measurements[0].label === 'Altezza' && norm.modelInfo.measurements[0].en === 'Height', 'misura localizzata (label/en/fr)');
 assert(norm.modelInfo.agencies[0].city === 'Mi', 'agenzia mappata');
 assert(norm.galleryImages[0].alt === 'Foto', 'alt localizzata (it)');
@@ -75,19 +73,17 @@ const withApi = normalizeConfig(
     profile: {
       ...mock.profile,
       heroImageUrl: 'https://cdn/hero.jpg',
-      comcardUrl: 'https://cdn/comcard.pdf',
     },
   },
-  { heroImage: 'static-hero.jpg', comcardUrl: '/comcard.pdf' }
+  { heroImage: 'static-hero.jpg' }
 );
 assert(withApi.modelInfo.heroImage === 'https://cdn/hero.jpg', 'heroImageUrl preferito all API');
-assert(withApi.modelInfo.comcardUrl === 'https://cdn/comcard.pdf', 'comcardUrl preferito all API');
 
 console.log(`\nFetch reale dal backend locale: ${buildConfigUrl(DEV_API_BASE_URL)}`);
 try {
   const real = await fetchPortfolioConfig({
     apiBaseUrl: DEV_API_BASE_URL,
-    staticOverrides: { heroImage: 'static-hero.jpg', comcardUrl: '/comcard.pdf' },
+    staticOverrides: { heroImage: 'static-hero.jpg' },
   });
   assert(real.modelInfo.firstName === 'Tais', 'firstName dal backend');
   assert(real.modelInfo.lastName === 'Nascimento', 'lastName dal backend');
@@ -97,7 +93,6 @@ try {
   assert(real.modelInfo.measurements.length >= 1 && real.modelInfo.measurements[0].label, 'measurements mappate');
   assert(real.modelInfo.agencies.length >= 1 && real.modelInfo.agencies[0].name, 'agencies mappate');
   assert(real.modelInfo.heroImage === 'static-hero.jpg', 'heroImage resta statica (API heroImageUrl=null per ora)');
-  assert(real.modelInfo.comcardUrl === '/comcard.pdf', 'comcardUrl resta statica (API comcardUrl=null per ora)');
   assert(Array.isArray(real.galleryImages) && real.galleryImages.every((g) => g.src), 'galleryImages con src');
   assert(real.categories.includes('Tutti'), 'categorie dal backend incl. "Tutti"');
   assert(real.showreel.youtubeVideoId === 'GGVI978SLu0', 'showreel dal backend');

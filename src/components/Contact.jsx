@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail, FileDown, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 import { usePortfolioData } from '../context/PortfolioContext.jsx';
-import { assetUrl } from '../data/portfolioData.js';
 import TiktokIcon from './icons/TiktokIcon.jsx';
 
 const socialIcons = {
@@ -30,8 +29,6 @@ const Contact = ({ language }) => {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
-  const comcardHref = assetUrl(modelInfo.comcardUrl);
 
   return (
     <section
@@ -72,18 +69,6 @@ const Contact = ({ language }) => {
             {modelInfo.email}
           </a>
           <div className="mx-auto mt-4 h-px w-0 bg-sand/50 transition-all duration-700 group-hover:w-full" />
-        </div>
-
-        {/* Pulsante Comcard */}
-        <div className="mt-10">
-          <a
-            href={comcardHref}
-            download
-            className="inline-flex items-center gap-2 border border-bone/25 px-10 py-4 text-[11px] font-medium uppercase tracking-[0.3em] text-bone/85 transition-all duration-500 hover:border-sand hover:bg-sand hover:text-ink"
-          >
-            <FileDown size={15} />
-            {t.downloadComcard}
-          </a>
         </div>
 
         {/* Social */}

@@ -60,9 +60,8 @@ const toId = (value) => {
  * dai componenti (stessa struttura che era in portfolioData.js).
  *
  * `staticOverrides` contiene i valori che restano cablati nel frontend
- * finché il backend non li espone: `{ heroImage, comcardUrl }`.
- * Quando l'API restituisce `heroImageUrl` / `comcardUrl` non nulli,
- * questi hanno priorità.
+ * finché il backend non li espone: `{ heroImage }`.
+ * Quando l'API restituisce `heroImageUrl` non nullo, ha priorità.
  */
 export const normalizeConfig = (api, staticOverrides = {}) => {
   const profile = api?.profile ?? {};
@@ -100,9 +99,6 @@ export const normalizeConfig = (api, staticOverrides = {}) => {
       country: a?.country ?? '',
     })),
     email: profile.email ?? '',
-    // Comcard: resta cablata in portfolioData.js finché il backend
-    // non espone un asset registrato (comcardUrl).
-    comcardUrl: profile.comcardUrl || staticOverrides.comcardUrl || '',
   };
 
   const galleryImages = gallery

@@ -24,4 +24,8 @@ pnpm-debug.log*
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw?c
+
+# env
+.env
+!.env.example

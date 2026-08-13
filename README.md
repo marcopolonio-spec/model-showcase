@@ -18,7 +18,7 @@ testi UI, social) **non sono più statiche**: vengono recuperate dal backend
 - **Filtri per categoria**: Editorial, Runway, Commercial, Beauty (categorie dal backend)
 - **Lightbox dedicato** con navigazione da tastiera (→ / ← / ESC) e da touch
 - **Sezione About** con biografia, misure e agenzie
-- **Sezione Contatti** con email diretta e download Comcard PDF
+- **Sezione Contatti** con email diretta e link social
 - **Design minimale scuro/neutro** con tipografia elegante (Cormorant Garamond + Inter)
 - **Animazioni on-scroll** con Intersection Observer
 - **Dropdown lingua** italiano / english / français (configurabile dal backend)
@@ -73,12 +73,11 @@ Il flusso dei dati:
    risposta dell'API nella struttura che i componenti già usavano.
 4. Ogni componente legge i dati con l'hook `usePortfolioData()`.
 
-**Configurazioni statiche rimaste nel frontend (per ora):**
+**Configurazione statica rimasta nel frontend (per ora):**
 - `heroImage` — la hero image (import locale in `portfolioData.js`)
-- `comcardUrl` — il PDF della comcard (file `/public/comcard.pdf`)
 
-Quando il backend espone questi asset (`profile.heroImageUrl` /
-`profile.comcardUrl` nella risposta dell'API), i valori dell'API hanno priorità.
+Quando il backend espone questo asset (`profile.heroImageUrl` nella risposta
+dell'API), il valore dell'API ha priorità.
 Se il backend non è raggiungibile il sito mostra una schermata di errore con
 il pulsante *Riprova*.
 
@@ -89,7 +88,6 @@ il pulsante *Riprova*.
 ```
 model-showcase/
 ├── public/
-│   ├── comcard.pdf
 │   └── favicon.svg
 ├── scripts/
 │   └── verify-config.mjs     # verifica la pipeline API (node scripts/verify-config.mjs)
@@ -108,7 +106,7 @@ model-showcase/
 │   ├── context/
 │   │   └── PortfolioContext.jsx  # Provider + hook usePortfolioData()
 │   ├── data/
-│   │   ├── portfolioData.js      # hero image + comcard statiche, URL API
+│   │   ├── portfolioData.js      # hero image statica, URL API
 │   │   └── portfolioConfig.js    # fetch + normalize della config dal backend
 │   ├── App.jsx
 │   ├── main.jsx
@@ -128,12 +126,10 @@ I contenuti **non si modificano più nel frontend**: si aggiornano nel database 
 backend (`mod-show-backend`), tramite il pannello admin (`/admin`) o le API
 amministrative. Il frontend li mostra automaticamente all'avvio.
 
-Uniche configurazioni ancora locali:
+Unica configurazione ancora locale:
 
 1. **Hero image** — sostituisci `src/assets/images/hero2.jpg` (oppure caricala
    nel backend come asset e collegala al profilo: avrà priorità).
-2. **Comcard PDF** — sostituisci `public/comcard.pdf` (oppure caricala nel
-   backend come asset: avrà priorità).
 
 Per verificare che il frontend recuperi correttamente i dati dal backend:
 

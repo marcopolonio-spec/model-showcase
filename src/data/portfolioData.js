@@ -5,12 +5,10 @@
 // recuperate dal backend tramite `fetchPortfolioConfig()` e
 // normalizzate in `portfolioConfig.js`.
 //
-// In questo file restano cablate SOLO:
+// In questo file resta cablata SOLO:
 //   - la HERO IMAGE (import locale)
-//   - la COMCARD (PDF in /public)
-// finché il backend non espone questi asset via API
-// (profile.heroImageUrl / profile.comcardUrl in
-// `/api/v1/public/config?slug=tais-nascimento`).
+// finché il backend non espone questo asset via API
+// (profile.heroImageUrl in `/api/v1/public/config?slug=tais-nascimento`).
 // ============================================================
 
 // ------------------------------------------------------------------
@@ -26,18 +24,17 @@ export const assetUrl = (path) => {
   // (es. '/model-showcase/assets/hero-abc123.jpg' in produzione),
   // quindi non va aggiunto di nuovo.
   if (path.startsWith(basePath)) return path;
-  // Per i file in /public (es. '/comcard.pdf') aggiungi il base path.
+  // Per i file in /public aggiungi il base path.
   return `${basePath}${path.replace(/^\/+/, '')}`;
 };
 
 // ------------------------------------------------------------------
-// Configurazioni statiche — hero image e comcard
-// (da sostituire con gli asset del backend quando saranno disponibili)
+// Configurazioni statiche — hero image
+// (da sostituire con l'asset del backend quando sarà disponibile)
 // ------------------------------------------------------------------
 import heroImage from '../assets/images/hero2.jpg';
 
 export const STATIC_HERO_IMAGE = heroImage;
-export const STATIC_COMCARD_URL = '/comcard.pdf';
 
 // ------------------------------------------------------------------
 // Configurazione API backend
@@ -56,12 +53,12 @@ export { DEV_API_BASE_URL, PROD_API_BASE_URL, PROFILE_SLUG } from './portfolioCo
 
 // ------------------------------------------------------------------
 // Fetch della configurazione: recupera i dati dal backend e li
-// normalizza nella forma usata dai componenti. Hero image e comcard
-// vengono passate come fallback statici finché l'API non le espone.
+// normalizza nella forma usata dai componenti. La hero image viene
+// passata come fallback statico finché l'API non la espone.
 // ------------------------------------------------------------------
 export const fetchPortfolioConfig = () =>
   fetchRawConfig({
     apiBaseUrl: API_BASE_URL,
     slug: PROFILE_SLUG,
-    staticOverrides: { heroImage, comcardUrl: STATIC_COMCARD_URL },
+    staticOverrides: { heroImage },
   });
