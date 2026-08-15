@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Ruler, Building2, MapPin } from 'lucide-react';
+import { Building2, MapPin } from 'lucide-react';
 import { usePortfolioData } from '../context/PortfolioContext.jsx';
 
 const About = ({ language }) => {
@@ -70,26 +70,9 @@ const About = ({ language }) => {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          {/* Misure */}
-          <div className="rounded-sm border border-bone/10 bg-onyx/60 p-6 backdrop-blur-sm sm:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <Ruler size={18} className="text-sand" />
-              <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] text-bone/80">
-                {t.measurementsTitle}
-              </h3>
-            </div>
-
-            <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
-              {modelInfo.measurements.map((m) => (
-                <li key={m.label} className="flex flex-col gap-0.5">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-bone/45">
-                    {m[language] || m.label}
-                  </span>
-                  <span className="font-serif text-xl text-bone">{m.value}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Misure: sezione disabilitata (non visibile). Per riattivarla,
+              ripristinare il blocco JSX "Misure" e l'import di Ruler da
+              lucide-react in cima a questo file. */}
 
           {/* Agenzie */}
           <div className="mt-6 rounded-sm border border-bone/10 bg-onyx/60 p-6 backdrop-blur-sm sm:p-8">
