@@ -81,9 +81,6 @@ const Gallery = ({ language, onImageClick }) => {
         role="group"
         aria-label="Filtri portfolio"
       >
-        <span className="text-[11px] uppercase tracking-[0.25em] text-bone/40">
-          {t.filterLabel}
-        </span>
         {categories.map((cat) => {
           const isActive = cat === activeFilter;
           return (
@@ -96,7 +93,7 @@ const Gallery = ({ language, onImageClick }) => {
               }`}
               aria-pressed={isActive}
             >
-              {cat === 'Tutti' ? 'Miscellaneous' : cat}
+              {cat === 'Tutti' ? 'All' : cat}
               <span
                 className={`absolute -bottom-0.5 left-0 h-px bg-sand transition-all duration-500 ${
                   isActive ? 'w-full' : 'w-0'
