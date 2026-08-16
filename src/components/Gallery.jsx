@@ -96,7 +96,7 @@ const Gallery = ({ language, onImageClick }) => {
               }`}
               aria-pressed={isActive}
             >
-              {cat}
+              {cat === 'Tutti' ? 'Miscellaneous' : cat}
               <span
                 className={`absolute -bottom-0.5 left-0 h-px bg-sand transition-all duration-500 ${
                   isActive ? 'w-full' : 'w-0'
