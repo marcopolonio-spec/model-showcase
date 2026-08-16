@@ -146,10 +146,40 @@ export const normalizeConfig = (api, staticOverrides = {}) => {
       label: pickLocalized(n.label, lang, 'it'),
     }));
 
+  // Valori di fallback per i titoli delle sezioni: se l'API non li espone
+  // ancora (es. deployment datati), i titoli restano comunque visibili.
+  // Quando l'API fornisce le chiavi, queste hanno sempre priorità.
+  const headingDefaults = {
+    it: {
+      galleryHeadingPrefix: 'Il mio',
+      galleryHeadingEmphasis: 'lavoro',
+      aboutHeadingPrefix: 'Dietro',
+      aboutHeadingEmphasis: "l'obiettivo",
+      contactHeadingPrefix: 'Lavoriamo',
+      contactHeadingEmphasis: 'insieme',
+    },
+    en: {
+      galleryHeadingPrefix: 'My',
+      galleryHeadingEmphasis: 'work',
+      aboutHeadingPrefix: 'Behind the',
+      aboutHeadingEmphasis: 'lens',
+      contactHeadingPrefix: "Let's work",
+      contactHeadingEmphasis: 'together',
+    },
+    fr: {
+      galleryHeadingPrefix: 'Mon',
+      galleryHeadingEmphasis: 'travail',
+      aboutHeadingPrefix: 'Derrière',
+      aboutHeadingEmphasis: "l'objectif",
+      contactHeadingPrefix: 'Travaillons',
+      contactHeadingEmphasis: 'ensemble',
+    },
+  };
+
   const uiText = {
-    it: { ...(apiUiText.it ?? {}), nav: buildNavFor('it') },
-    en: { ...(apiUiText.en ?? {}), nav: buildNavFor('en') },
-    fr: { ...(apiUiText.fr ?? {}), nav: buildNavFor('fr') },
+    it: { ...headingDefaults.it, ...(apiUiText.it ?? {}), nav: buildNavFor('it') },
+    en: { ...headingDefaults.en, ...(apiUiText.en ?? {}), nav: buildNavFor('en') },
+    fr: { ...headingDefaults.fr, ...(apiUiText.fr ?? {}), nav: buildNavFor('fr') },
   };
 
   return {

@@ -63,14 +63,14 @@ const Gallery = ({ language, onImageClick }) => {
             Portfolio
           </p>
           <h2 className="font-serif text-4xl font-light text-bone sm:text-5xl">
-            Il mio <span className="italic text-sand">lavoro</span>
+            {t.galleryHeadingPrefix} <span className="italic text-sand">{t.galleryHeadingEmphasis}</span>
           </h2>
         </div>
 
-        <p className="max-w-md text-sm leading-relaxed text-bone/60">
+        {/*<p className="max-w-md text-sm leading-relaxed text-bone/60">
           Editorial, runway, commercial e beauty: una selezione di scatti che
           raccontano versatilità, intensità e stile.
-        </p>
+        </p>*/}
       </div>
 
       {/* Filtri categoria */}

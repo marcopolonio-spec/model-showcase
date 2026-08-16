@@ -50,7 +50,7 @@ const Contact = ({ language }) => {
           {t.contactTitle}
         </p>
         <h2 className="font-serif text-4xl font-light leading-tight text-bone sm:text-6xl">
-          Lavoriamo <span className="italic text-sand">insieme</span>
+          {t.contactHeadingPrefix} <span className="italic text-sand">{t.contactHeadingEmphasis}</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-bone/65">
           {t.contactSubtitle}

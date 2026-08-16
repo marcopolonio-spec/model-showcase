@@ -44,7 +44,7 @@ const About = ({ language }) => {
             About
           </p>
           <h2 className="font-serif text-4xl font-light leading-tight text-bone sm:text-5xl">
-            Dietro <span className="italic text-sand">l'obiettivo</span>
+            {t.aboutHeadingPrefix} <span className="italic text-sand">{t.aboutHeadingEmphasis}</span>
           </h2>
 
           <p className="mt-8 max-w-xl font-serif text-lg italic leading-relaxed text-bone/80 sm:text-xl">
