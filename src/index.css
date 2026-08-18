@@ -98,13 +98,20 @@ body {
 
 /* ============================================
    GALLERIA MASONRY — altezze variabili
+   --------------------------------------------
+   - sotto 380px  -> 1 colonna  (schermi molto stretti)
+   - 380–1023px   -> 2 colonne  (smartphone)
+   - 1024px+      -> 3 colonne  (desktop/tablet grandi)
+   La soglia a 2 colonne parte da 380px così anche su
+   smartphone (es. 414px) la sezione resta compatta e
+   l'IntersectionObserver (threshold 0.15) scatta sempre.
    ============================================ */
 .masonry {
   columns: 1;
   column-gap: 1rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 380px) {
   .masonry {
     columns: 2;
   }
