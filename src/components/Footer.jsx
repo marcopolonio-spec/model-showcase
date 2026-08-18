@@ -1,6 +1,7 @@
 import { usePortfolioData } from '../context/PortfolioContext.jsx';
 import { Instagram, Linkedin } from 'lucide-react';
 import TiktokIcon from './icons/TiktokIcon.jsx';
+import { APP_VERSION } from '../config/version.js';
 
 const socialIcons = {
   Instagram,
@@ -8,11 +9,19 @@ const socialIcons = {
   LinkedIn: Linkedin,
 };
 
+// Etichetta della versione mostrata nel footer, localizzata.
+const versionLabels = {
+  it: 'Versione',
+  en: 'Version',
+  fr: 'Version',
+};
+
 const Footer = ({ language }) => {
   const { data } = usePortfolioData();
   const { modelInfo, socials, uiText } = data;
   const t = uiText[language];
   const year = new Date().getFullYear();
+  const versionLabel = versionLabels[language] ?? 'Versione';
 
   return (
     <footer className="border-t border-bone/10 bg-onyx/40" aria-label="Footer">
@@ -66,7 +75,9 @@ const Footer = ({ language }) => {
           <p className="text-xs text-bone/40">
             © {year} {modelInfo.name}. {t.footerRights}
           </p>
-          <p className="text-xs text-bone/30">{t.footerCredit}</p>
+          <p className="text-xs text-bone/30">
+            {t.footerCredit} · {versionLabel} {APP_VERSION}
+          </p>
         </div>
       </div>
     </footer>

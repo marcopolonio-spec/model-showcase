@@ -4,17 +4,29 @@ on:
   push:
     branches: [master]
 
+# Una sola pipeline di release alla volta: un nuovo push su master cancella
+# l'esecuzione in corso. Il commit automatico di release contiene
+# "[skip ci]", quindi non riattiva questo workflow (nessun loop infinito).
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write  # commit del bump, tag e GitHub Release
+  pages: write     # deploy su GitHub Pages
+  id-token: write  # autenticazione OIDC per actions/deploy-pages
 
 jobs:
   build:
+    # Guardia anti-loop: il commit generato dal bump ("[skip ci]") non
+    # deve far ripartire la pipeline di release/deploy.
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # history completa: necessaria per versione e tag
 
       - uses: actions/setup-node@v4
         with:
@@ -22,7 +34,58 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+
+      # 1) Incrementa esclusivamente la patch (x.y.z -> x.y.(z+1)),
+      #    senza creare commit/tag npm (il versionamento lo gestiamo noi).
+      - name: Bump versione patch
+        run: |
+          npm version patch --no-git-tag-version
+          NEW_VERSION="$(node -p "require('./package.json').version")"
+          RELEASE_TAG="v${NEW_VERSION}"
+          echo "NEW_VERSION=${NEW_VERSION}" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=${RELEASE_TAG}" >> "$GITHUB_ENV"
+          echo "Nuova versione: ${NEW_VERSION} (tag ${RELEASE_TAG})"
+
+      # 2) Se il tag esiste già, fallisci con un messaggio esplicito.
+      - name: Verifica tag non esistente
+        run: |
+          if git rev-parse -q --verify "refs/tags/${RELEASE_TAG}" >/dev/null; then
+            echo "::error::Il tag ${RELEASE_TAG} esiste già. Elimina il tag/release esistente o alza la versione in package.json prima di rifare il deploy."
+            exit 1
+          fi
+
+      # 3) Commit della versione incrementata su master. Il messaggio
+      #    contiene "[skip ci]": GitHub Actions non riavvia il workflow.
+      - name: Commit bump di versione
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore(release): v${NEW_VERSION} [skip ci]"
+          git push origin master
+
+      # 4) Crea e pubblica il tag vX.Y.Z sul commit del bump.
+      - name: Crea e pubblica tag
+        run: |
+          git tag "${RELEASE_TAG}"
+          git push origin "${RELEASE_TAG}"
+
+      # 5) GitHub Release associata al tag appena creato.
+      - name: Crea GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${RELEASE_TAG}" \
+            --repo "${{ github.repository }}" \
+            --title "Release ${RELEASE_TAG}" \
+            --generate-notes
+
+      # 6) Build con la versione appena incrementata: VITE_APP_VERSION
+      #    viene iniettata in import.meta.env.VITE_APP_VERSION.
+      - name: Build
+        env:
+          VITE_APP_VERSION: ${{ env.NEW_VERSION }}
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -33,6 +96,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - uses: actions/deploy-pages@v4
+      - id: deployment
+        uses: actions/deploy-pages@v4
