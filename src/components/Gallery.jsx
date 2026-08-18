@@ -67,10 +67,10 @@ const Gallery = ({ language, onImageClick }) => {
           </h2>
         </div>
 
-        {/*<p className="max-w-md text-sm leading-relaxed text-bone/60">
-          Editorial, runway, commercial e beauty: una selezione di scatti che
+        <p className="max-w-md text-sm leading-relaxed text-bone/60">
+          Una selezione di scatti che
           raccontano versatilità, intensità e stile.
-        </p>*/}
+        </p>
       </div>
 
       {/* Filtri categoria */}
